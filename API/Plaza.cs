@@ -1,48 +1,89 @@
 using System;
 using System.Collections.Generic;
 
-namespace SI4
+namespace SI4.API
 {
     public class Plaza : IPlaza
     {
-        List<Shop> Shops;
-        public Plaza()  //ctor
+        public string Name;
+        bool isOpen;
+        List<IShop> Shops;
+        public Plaza(string name)  //ctor
         {
-
+            Name = name;
+            Shops = new List<IShop>();
+            isOpen = false;
         }
-        public void AddShop(Shop shop)
+        public void AddShop(IShop shop)
         {
-            throw new System.NotImplementedException();
+            if (isOpen)
+                if (Shops.Contains(shop))
+                {
+                    throw new ShopAlreadyExistsException();
+                }
+                else
+                {
+                    Shops.Add(shop);
+                    return;
+                }
+            throw new PlazaIsClosedException();
         }
 
-        public void Close()
+        public IShop FindShopByName(string name)
         {
-            throw new System.NotImplementedException();
+            if (isOpen)
+                foreach (IShop shop in Shops)
+                {
+                    if (shop.GetName().ToLower() == name.ToLower())
+                    {
+                        return shop;
+                    }
+                    else
+                    {
+                        throw new NoSuchShopException();
+                    }
+                }
+            throw new PlazaIsClosedException();
         }
 
-        public Shop FindShopByName(string name)
+        public List<IShop> GetShops()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public System.Collections.Generic.List<Shop> GetShops()
-        {
-            throw new System.NotImplementedException();
+            if (isOpen)
+                return Shops;
+            throw new PlazaIsClosedException();
         }
 
         public bool IsOpen()
         {
-            throw new System.NotImplementedException();
+            return isOpen;
         }
 
         public void Open()
         {
-            throw new System.NotImplementedException();
+            isOpen = true;
         }
 
-        public void RemoveShop(Shop shop)
+        public void Close()
         {
-            throw new System.NotImplementedException();
+            isOpen = false;
+        }
+
+        public void RemoveShop(IShop shop)
+        {
+            if (isOpen)
+            {
+                if (!Shops.Remove(Shops.Find(s => s.Equals(shop))))
+                {
+                    throw new NoSuchShopException();
+                }
+                return;
+            }
+            throw new PlazaIsClosedException();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

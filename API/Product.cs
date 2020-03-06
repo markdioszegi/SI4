@@ -1,4 +1,4 @@
-namespace SI4
+namespace SI4.API
 {
     public abstract class Product
     {

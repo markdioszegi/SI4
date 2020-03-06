@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
 
-namespace SI4
+namespace SI4.API
 {
     public interface IPlaza
     {
-        List<Shop> GetShops();
-        void AddShop(Shop shop);
-        void RemoveShop(Shop shop);
-        Shop FindShopByName(String name);
+        List<IShop> GetShops();
+        void AddShop(IShop shop);
+        void RemoveShop(IShop shop);
+        IShop FindShopByName(String name);
         bool IsOpen();
         void Open();
         void Close();
-        String ToString();
+        string ToString();
     }
 }

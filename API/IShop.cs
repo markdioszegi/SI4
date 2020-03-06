@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SI4
+namespace SI4.API
 {
     public interface IShop
     {

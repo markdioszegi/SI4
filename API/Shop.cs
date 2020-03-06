@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 
-namespace SI4
+namespace SI4.API
 {
     public class Shop : IShop
     {
         string Name;
         string Owner;
-        Dictionary<long, Shop.ShopEntry> Products;
+        Dictionary<long, ShopEntry> Products;
         public Shop(string name, string owner)     //ctor
         {
             Name = name;
             Owner = owner;
+            Products = new Dictionary<long, ShopEntry>();
         }
         public void AddNewProduct(Product product, int quantity, float price)
         {
