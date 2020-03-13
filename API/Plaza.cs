@@ -32,17 +32,16 @@ namespace SI4.API
         public IShop FindShopByName(string name)
         {
             if (isOpen)
+            {
                 foreach (IShop shop in Shops)
                 {
                     if (shop.GetName().ToLower() == name.ToLower())
                     {
                         return shop;
                     }
-                    else
-                    {
-                        throw new NoSuchShopException();
-                    }
                 }
+                throw new NoSuchShopException();
+            }
             throw new PlazaIsClosedException();
         }
 

@@ -78,6 +78,11 @@ namespace SI4.API
             throw new System.NotImplementedException();
         }
 
+        public override string ToString()
+        {
+            return $"Shop name: {Name}; Owner name: {Owner}";
+        }
+
         class ShopEntry
         {
             Product Product { get; set; }
